@@ -1,3 +1,5 @@
+#Choose any stock or sector or index that you want
+
 #setup modules needed
 import pandas as pd
 import matplotlib.pyplot as plt
