@@ -1,0 +1,32 @@
+# setup panda for importing
+import pandas as pd
+from datetime import datetime
+import os
+print(os.getcwd())
+path1 = (r'C:\Users\...Daily Stock Quote Folder')
+path2 = (r'C:\Users\...Main Project Folder')
+# to load latest csv file to a panda dataframe
+# input date in the ff. format MMDDYYYY
+prevdate = ('MMDDYYYY')
+end_date = ('MMDDYYYY')
+#i = f'{datetime.now():%m%d%Y}'
+#end_date = str(i[:10])
+
+os.chdir(path1)
+latestcsv = 'stockQuotes_' + end_date + '.csv'
+dfnew = pd.read_csv(latestcsv, names=['TICKER', 'DATE', 'OPEN',
+                                      'HIGH', 'LOW', 'CLOSE', 'VOLUME', 'NFB'], index_col='DATE')
+
+os.chdir(path2)
+# load current conso file
+dfconso = pd.read_csv('conso' + prevdate + '.csv', index_col='DATE')
+
+# to append latest csv to conso file and show stats before and after
+
+dfconso.append(dfnew).to_csv('conso' + end_date + '.csv')
+dfconsoprevdate = pd.read_csv('conso' + prevdate + '.csv')
+print(dfconsoprevdate.tail())
+dfconsoenddate = pd.read_csv('conso' + end_date + '.csv')
+print(dfconsoenddate.tail())
+print(prevdate, '+', end_date, '=', 'conso' + end_date + '.csv')
+print(len(dfconso), '+', len(dfnew), '=', len(dfconsoenddate))
