@@ -2,13 +2,14 @@
 import pandas as pd
 from datetime import datetime
 import os
-print(os.getcwd())
-path1 = (r'C:\Users\...Daily Stock Quote Folder')
-path2 = (r'C:\Users\...Main Project Folder')
+path1 = (r'C:\Users\jong\PycharmProjects\Stocks\PSE screener\stockQuotes')
+path2 = (r'C:\Users\jong\PycharmProjects\Stocks\PSE screener')
+# os.chdir(path2)
+
 # to load latest csv file to a panda dataframe
 # input date in the ff. format MMDDYYYY
-prevdate = ('MMDDYYYY')
-end_date = ('MMDDYYYY')
+prevdate = ('10182018')
+end_date = ('10192018')
 #i = f'{datetime.now():%m%d%Y}'
 #end_date = str(i[:10])
 
@@ -22,7 +23,6 @@ os.chdir(path2)
 dfconso = pd.read_csv('conso' + prevdate + '.csv', index_col='DATE')
 
 # to append latest csv to conso file and show stats before and after
-
 dfconso.append(dfnew).to_csv('conso' + end_date + '.csv')
 dfconsoprevdate = pd.read_csv('conso' + prevdate + '.csv')
 print(dfconsoprevdate.tail())
