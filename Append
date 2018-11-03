@@ -8,8 +8,8 @@ path2 = (r'C:\Users\jong\PycharmProjects\Stocks\PSE screener')
 
 # to load latest csv file to a panda dataframe
 # input date in the ff. format MMDDYYYY
-prevdate = ('10182018')
-end_date = ('10192018')
+prevdate = ('10302018')
+end_date = ('10312018')
 #i = f'{datetime.now():%m%d%Y}'
 #end_date = str(i[:10])
 
