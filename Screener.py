@@ -8,16 +8,15 @@ path2 = (r'C:\Users\jong\PycharmProjects\Stocks\PSE screener')
 path3 = (r'C:\Users\jong\PycharmProjects\Stocks\PSE screener\stockCaps')
 import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
 # from matplotlib import style
 # style.use('seaborn-dark')  # other choice: 'seaborn-pastel'
 
 # Choose the stock and last trading date
-What_Stock1 = 'ABA'
+What_Stock1 = 'VUL'
 What_Stock2 = '^PSEi'
 # i = f'{datetime.now():%m%d%Y}'
 # end_date = str(i[:10])
-end_date = ('10192018')
+end_date = ('10312018')
 
 os.chdir(path2)
 # load csv to a panda dataframe
@@ -70,6 +69,7 @@ df2.index.name = 'DATE'
 # create graph of chosen symbol(1st chart Stock Prices)
 # plt.figure(figsize=(21, 10.8))  # frameon=False).patch.set_visible(False)
 # plt.subplots(sharex='all')
+plt.figure(figsize=(20, 10))
 plt.subplot(5, 1, 1)
 plt.subplot2grid((5, 1), (0, 0), rowspan=2, colspan=1)
 
@@ -79,8 +79,8 @@ plt.xticks([])
 # for dates, prices in df2.CLOSE.items():
 plt.annotate(str(df2.CLOSE[-1]), xy=(LastDate, LastPrice),
              color='blue', fontSize=15)
-plt.legend([What_Stock1], loc='upper center', prop={'size': 25})
-
+plt.legend([What_Stock1], loc='upper center', prop={'size': 20})
+plt.grid(color='lightgray')
 plt.subplot(5, 1, 3)
 plt.plot(df3.CLOSE, color='darkgreen', linewidth=2.5)
 plt.xticks([])
@@ -90,7 +90,7 @@ plt.xticks([])
 # plt.grid(False)
 # plt.ylim(0, 9000)
 plt.annotate(str(df3.CLOSE[-1]), xy=(LastDate, LastPrice2),
-             color='darkgreen', fontSize=15)
+             color='darkgreen', fontSize=12)
 plt.legend(['PSEI'], loc='upper center')
 
 # create graph of chosen symbol (2nd chart VOLUME)
@@ -112,6 +112,6 @@ plt.axis('on')
 plt.grid(False)
 plt.legend(['Net Foreign'], loc='upper center')
 os.chdir(path3)
-plt.savefig(end_date + What_Stock1 + '.svg', dpi=1200)
+plt.savefig(end_date + What_Stock1 + '.png', dpi=1200)
 plt.show()
 
