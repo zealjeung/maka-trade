@@ -25,7 +25,7 @@ end_date = str(i[:10])
 
 from alpha_vantage.timeseries import TimeSeries
 from pprint import pprint
-os.chdir(r'C:\Users\jong\PycharmProjects\Stocks\US Stocks')
+os.chdir(r'D:\Users\jong\PyProjects\Stocks\US Stocks')
 key = open('alphavantage.txt', 'r').read()
 ts = TimeSeries(key=key, output_format='pandas')
 data = data, meta_data = ts.get_daily_adjusted(symbol='AMZN',
@@ -36,15 +36,15 @@ data.set_index('date', inplace=True)
 print(data.tail())
 
 plt.figure(figsize=(21, 10.8))
-plt.plot(data['4. close'], linewidth=3, color='turquoise')
-plt.plot(data['4. close'], linewidth=3, color='turquoise')
+plt.plot(data['4. close'], linewidth=1.5, color='turquoise')
+plt.plot(data['4. close'], linewidth=1.5, color='turquoise')
 plt.ylabel('Close ($USD)', fontSize=12)
 plt.title('YTD PERFORMANCE')
 plt.grid(True, color='snow', linewidth=.25)
 plt.annotate("      " + str(data['4. close'][-1]), xy=(i, data['4. close'][-1]),
              color='turquoise', fontSize=25)
 plt.legend([TICKER2], loc='upper center', prop={'size': 20})
-path3 = (r'C:\Users\jong\PycharmProjects\Stocks\US Stocks')
+path3 = (r'D:\Users\jong\PyProjects\Stocks\US Stocks')
 os.chdir(path3)
 plt.savefig(end_date + ' ' + TICKER2 + '.svg', dpi=1200)
 plt.show()
