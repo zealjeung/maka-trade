@@ -1,6 +1,6 @@
 import os
-path2 = (r'C:\Users\jong\PycharmProjects\Stocks\PSE screener')
-path3 = (r'C:\Users\jong\PycharmProjects\Stocks\PSE screener\stockCaps')
+path2 = (r'D:\Users\jong\PyProjects\Stocks\PSE screener')
+path3 = (r'D:\Users\jong\PyProjects\Stocks\PSE screener\stockCaps')
 import pandas as pd
 import matplotlib.pyplot as plt
 from mpl_finance import candlestick_ohlc
@@ -8,8 +8,8 @@ import matplotlib.dates as mdates
 from matplotlib.dates import DateFormatter, date2num, WeekdayLocator, DayLocator, MONDAY, SATURDAY, SUNDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY
 
 date1 = "2018-1-1"
-date2 = "2018-10-19"
-end_date = '10192018'
+date2 = "2018-11-08"
+end_date = '11292018'
 What_Stock1 = 'NOW'
 
 os.chdir(path2)
@@ -31,7 +31,7 @@ ax.xaxis.set_major_formatter(dayFormatter)
 candlestick_ohlc(ax, zip(mdates.date2num(df2.index.to_pydatetime()),
                          df2['OPEN'], df2['HIGH'],
                          df2['LOW'], df2['CLOSE']),
-                 width=.9, colorup='g', alpha=.9)
+                 width=.7, colorup='g', alpha=.9)
 
 ax.xaxis_date()
 ax.autoscale_view()
