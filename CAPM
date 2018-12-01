@@ -7,11 +7,11 @@ import numpy as np
 # Variables
 What_Stock1 = 'MWIDE'
 What_Stock2 = '^PSEi'
-end_date = ('10192018')
+end_date = ('11292018')
 # Paths
-path1 = (r'C:\Users\jong\PycharmProjects\Stocks\PSE screener\stockQuotes')
-path2 = (r'C:\Users\jong\PycharmProjects\Stocks\PSE screener')
-path3 = (r'C:\Users\jong\PycharmProjects\Stocks\PSE screener\stockCaps')
+path1 = (r'D:\Users\jong\PyProjects\Stocks\PSE screener\stockQuotes')
+path2 = (r'D:\Users\jong\PyProjects\Stocks\PSE screener')
+path3 = (r'D:\Users\jong\PyProjects\Stocks\PSE screener\stockCaps')
 os.chdir(path2)
 
 # Loading
