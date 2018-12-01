@@ -1,4 +1,4 @@
-1  # to load needed modules
+# to load needed modules
 import quandl  # financial data source
 import pandas as pd  # for dataframe setup and csv loading
 from datetime import datetime  # timse series: date convention
@@ -15,7 +15,7 @@ dftick = pd.read_html(
 print(dftick[0])
 
 # Input database/ticker url:https://docs.quandl.com/docs/data-organization
-TICKER = 'EOD/MSFT'  # use either EOD or XNAS(datasets) / then ticker
+TICKER = 'EOD/AAPL'  # use either EOD or XNAS(datasets) / then ticker
 TICKER2 = TICKER[-4:]  # change according to number of ticker characters
 
 # Date Option 1 - use this only if current day is weekday(-1 converted to US)
@@ -29,7 +29,7 @@ api_version = end_date
 
 # to config request of data from quandl
 # read my quandl api key  stored in a .txt file
-os.chdir(r'C:\Users\jong\PycharmProjects\Stocks\US Stocks')
+os.chdir(r'D:\Users\jong\PyProjects\Stocks\US Stocks')
 quandl.ApiConfig.api_key = open('quandl.txt', 'r').read()
 quandl.ApiConfig.api_version = api_version
 # change desired stock price start_date
@@ -42,7 +42,7 @@ print(Stock.columns)
 print(TICKER)
 print(Stock.describe())
 
-os.chdir(r'C:\Users\jong\PycharmProjects\Stocks\US Stocks')
+os.chdir(r'D:\Users\jong\PyProjects\Stocks\US Stocks')
 # to store data from quandl to a file and open it as dataframe
 Stock.to_csv(TICKER2 + ' ' + end_date + '_ohlc.csv')
 df = pd.read_csv(TICKER2 + ' ' + end_date + '_ohlc.csv', header=0,
@@ -62,7 +62,7 @@ plt.grid(False)
 plt.annotate(str(df.Close[-1]), xy=(i, df.Close[-1]),
              color='orange', fontSize=15)
 plt.legend([TICKER2], loc='upper center', prop={'size': 25})
-plt.savefig(end_date + ' ' + TICKER2 + '.svg')
+plt.savefig(end_date + ' ' + TICKER2 + '.png')
 plt.show()
 
 
@@ -74,3 +74,4 @@ YTD = (df.Close[(int(last)) - 1] -
        df.Close[0]) / df.Close[0]*100
 # To show YTD performance to date
 print('YTD', round(YTD, 2), '%')
+print(df.tail())
