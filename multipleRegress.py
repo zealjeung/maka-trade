@@ -1,16 +1,16 @@
 import datetime
 import os
-path = (r'C:\Users\jong\PycharmProjects\Stocks\PSE screener')
+path = (r'D:\Users\jong\PyProjects\Stocks\PSE screener')
 import pandas as pd
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from sklearn.linear_model import LinearRegression
 
 
-end_date = ('10242018')
-What_Stock1 = '^PSEi'
+end_date = ('11292018')
+What_Stock1 = 'AC'
 What_Stock2 = 'ALI'
-What_Stock3 = 'AC'
+What_Stock3 = '^PSEi'
 
 os.chdir(path)
 df = pd.read_csv('conso' + end_date + '.csv')
@@ -34,7 +34,7 @@ yline = -1.4e+03 + 4.5*(x1) + 5.2*(x2)
 #fig, ax = plt.subplot(4, 1, 1)
 #scat = ax.scatter(x1, x2, c=yline, s=20, marker='o')
 
-fig = plt.figure()
+fig = plt.figure(figsize=(20, 10))
 ax = fig.add_subplot(111, projection='3d')
 scat = ax.scatter(x1, x2, c=yline, s=75, alpha=.5)
 fig.colorbar(scat)
