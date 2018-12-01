@@ -1,6 +1,6 @@
 import os
-path2 = (r'C:\Users\jong\PycharmProjects\Stocks\PSE screener')
-path3 = (r'C:\Users\jong\PycharmProjects\Stocks\PSE screener\stockCaps')
+path2 = (r'D:\Users\jong\PyProjects\Stocks\PSE screener')
+path3 = (r'D:\Users\jong\PyProjects\Stocks\PSE screener\stockCaps')
 import pandas as pd
 import matplotlib.pyplot as plt
 from mpl_finance import candlestick_ohlc
@@ -12,9 +12,9 @@ from datetime import datetime
 
 
 date1 = "2018-1-1"
-date2 = "2018-10-19"
-end_date = '10192018'
-What_Stock1 = 'AC'
+date2 = "2018-11-29"
+end_date = '11292018'
+What_Stock1 = '^PSEi'
 
 os.chdir(path2)
 df = pd.read_csv('conso' + end_date + '.csv', index_col=0,
@@ -33,4 +33,4 @@ layout = go.Layout(title=What_Stock1, hovermode='closest',
                    font=dict(family='Courier New, monospace', size=18, color='#7f7f7f'))
 config = {'scrollZoom': True}
 fig = go.Figure(data=data, layout=layout)
-pyo.plot(fig, config=config, filename='OHLCint.html')
+pyo.plot(fig, config=config, filename='OHLCint ' + What_Stock1 + ' ' + end_date + '.html')
