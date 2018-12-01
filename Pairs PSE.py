@@ -4,29 +4,48 @@ import matplotlib.pyplot as plt
 import datetime
 import os
 import pprint
-#from zipline.api import order_target, record, symbol
+# from zipline.api import order_target, record, symbol
 
-start = '01-03-2018'
-end = '10-31-2018'
-
-What_Stock1 = 'ATN'
-What_Stock2 = 'ATNB'
-end_date = ('10312018')
-path2 = (r'C:\Users\jong\PycharmProjects\Stocks\PSE screener')
+Stock1 = 'ATN'
+Stock2 = 'ATNB'
+end_date = ('11292018')
+path2 = (r'D:\Users\jong\PyProjects\Stocks\PSE screener')
 os.chdir(path2)
 df = pd.read_csv('conso' + end_date + '.csv')
 df['DATE'] = pd.to_datetime(df.DATE)
 df.set_index('DATE', inplace=True)
 
-What_Stock1 = df[df['TICKER'] == What_Stock1]
-What_Stock2 = df[df['TICKER'] == What_Stock2]
+"""
+dfx = df['TICKER']
+dfy = df['TICKER'][1:]
+
+def make_df(dfx, dfy):
+    data = {cov: [np.corrcoef + str(i) for i in dfx]
+            for i in dfy}
+    return pd.DataFrame(data, dfy)
+
+make_df('A', range(3))
+
+for x in df:
+    for y in df2['TICKER']:
+        #        return pd.df3(x, y)
+        print(x)
+        print(y)
+"""
+
+What_Stock1 = df[df['TICKER'] == Stock1]
+What_Stock2 = df[df['TICKER'] == Stock2]
 
 pp = pprint.PrettyPrinter(indent=40, width=41, compact=True, depth=6)
-pp.pprint(What_Stock1.tail(3))
-pp.pprint(What_Stock2.tail(3))
+# pp.pprint(What_Stock1.tail(3))
+# pp.pprint(What_Stock2.tail(3))
 
 CC = np.corrcoef(What_Stock1['CLOSE'], What_Stock2['CLOSE'])
-pp.pprint(CC)
+
+if np.any(CC > .75):
+    pp.pprint(Stock1)
+    pp.pprint(Stock2)
+    pp.pprint(CC)
 
 fig = plt.figure(figsize=(20, 10))
 ax1 = plt.subplot(3, 1, 1, facecolor='w')
@@ -39,18 +58,6 @@ spread = What_Stock1['CLOSE'] - What_Stock2['CLOSE']
 spread.plot(label='Spread', figsize=(20, 10))
 plt.axhline(spread.mean(), c='r')
 plt.legend()
-
-"""
-def zscore(stocks):
-    return (stocks - stocks.mean()) / np.std(stocks)
-
-zscore(spread).plot(figsize=(14, 8))
-plt.axhline(zscore(spread).mean(), color='black')
-plt.axhline(1.0, c='r', ls='--')
-plt.axhline(-1.0, c='g', ls='--')
-plt.legend(['Spread z-score', 'Mean', '+1', '-1'])
-plt.show()
-"""
 
 # 1 day moving average of the price spread
 spread_mavg1 = spread.rolling(1).mean()
