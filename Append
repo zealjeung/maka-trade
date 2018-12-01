@@ -2,21 +2,27 @@
 import pandas as pd
 from datetime import datetime
 import os
-path1 = (r'C:\Users\jong\PycharmProjects\Stocks\PSE screener\stockQuotes')
-path2 = (r'C:\Users\jong\PycharmProjects\Stocks\PSE screener')
+path1 = (r'D:\Users\jong\PyProjects\Stocks\PSE screener\stockQuotes')
+path2 = (r'D:\Users\jong\PyProjects\Stocks\PSE screener')
 # os.chdir(path2)
-
 # to load latest csv file to a panda dataframe
 # input date in the ff. format MMDDYYYY
-prevdate = ('10302018')
-end_date = ('10312018')
+prevdate = ('11282018')
+prevurl = '3783'
+end_date = ('11292018')
+endurl = '3784'
 #i = f'{datetime.now():%m%d%Y}'
 #end_date = str(i[:10])
 
+url = str('http://www.stockmarketpilipinas.com/attachment.php?aid='+endurl)
+c = pd.read_csv(url)
+os.chdir(path1)
+c.to_csv('stockQuotes_' + end_date + '.csv')
+
 os.chdir(path1)
 latestcsv = 'stockQuotes_' + end_date + '.csv'
-dfnew = pd.read_csv(latestcsv, names=['TICKER', 'DATE', 'OPEN',
-                                      'HIGH', 'LOW', 'CLOSE', 'VOLUME', 'NFB'], index_col='DATE')
+dfnew = pd.read_csv(url, names=['TICKER', 'DATE', 'OPEN',
+                                'HIGH', 'LOW', 'CLOSE', 'VOLUME', 'NFB'], index_col='DATE')
 
 os.chdir(path2)
 # load current conso file
