@@ -15,4 +15,4 @@ Before:
 >Probably next I will include volume data into the chart and pull-off a Minervini VCP strategy/setup.
 
 Latest:
-Ill stick with the line plot but now I already have the featured stock, the main index PSEI, volume, net foreign, and Sectors in one dashboard, which I often upload in Investagrams.
+Ill stick with the line plot but now I already have the featured stock, the main index PSEI, volume, net foreign, and Sectors in one dashboard, which I often upload in Investagrams. I run the Append.py and ScreenerSectors.py
