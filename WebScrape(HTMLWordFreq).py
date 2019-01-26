@@ -1,6 +1,8 @@
 # Store url of chosen novel from gutenberg
-#url = 'https://www.gutenberg.org/files/1342/1342-h/1342-h.htm'
-url = 'https://www.imsdb.com/scripts/Les-Miserables.html'
+# url = 'https://www.gutenberg.org/files/1342/1342-h/1342-h.htm'
+# url = 'https://www.imsdb.com/scripts/Les-Miserables.html'
+# url = 'http://syndein.com/Genesis.html'
+
 # import html5lib
 import html5lib
 # Import `requests`
@@ -46,4 +48,4 @@ sns.set()
 freqdist1 = nltk.FreqDist(words_ns)
 title = soup.title.string
 plt.title(title)
-freqdist1.plot(25)
+freqdist1.plot(20)
