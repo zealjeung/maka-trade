@@ -3,9 +3,11 @@ import datetime as datetime
 import matplotlib.pyplot as plt
 import pandas as pd
 
-
-path2 = (r'C:\Users\...) # where is your csv located
-path3 = (r'C:\Users\...) # where you want to save the output file
+# Edit this path first
+# Where is your csv located?
+path2 = (r'C:\Users\...) 
+# Where you want to save the output file?
+path3 = (r'C:\Users\...) 
 
 # Choose the stock and last trading date
 What_Stock = 'ISM'
