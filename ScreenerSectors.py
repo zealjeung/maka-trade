@@ -1,9 +1,11 @@
+# ScreenerSerctor file shows a selected stock to be featured and will be compared against PSEi and all other Index Sector
+
 import os
 import datetime as datetime
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# Edit this path first
+# Edit these paths first
 # Where is your csv located?
 path2 = (r'C:\Users\...) 
 # Where you want to save the output file?
