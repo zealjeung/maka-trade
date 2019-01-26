@@ -3,9 +3,9 @@ import datetime as datetime
 import matplotlib.pyplot as plt
 import pandas as pd
 
-path1 = (r'C:\Users\windows_10\PyProjects\Stocks\PSE screener\stockQuotes')
-path2 = (r'C:\Users\windows_10\PyProjects\Stocks\PSE screener')
-path3 = (r'C:\Users\windows_10\PyProjects\Stocks\PSE screener\stockCaps')
+
+path2 = (r'C:\Users\...) # where is your csv located
+path3 = (r'C:\Users\...) # where you want to save the output file
 
 # Choose the stock and last trading date
 What_Stock = 'ISM'
