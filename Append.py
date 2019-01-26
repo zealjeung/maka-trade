@@ -1,21 +1,30 @@
+#Append needs to be run so that the csv file will be updated to latest trading day.
+
 # setup panda for importing
 import pandas as pd
 from datetime import datetime
 import os
-path1 = (r'D:\Users\jong\PyProjects\Stocks\PSE screener\stockQuotes')
-path2 = (r'D:\Users\jong\PyProjects\Stocks\PSE screener')
+
+# Edit these paths first
+# Where is your csv?
+path1 = (r'C:\Users\...)
+# Where do you want to save your output file?
+path2 = (r'C:\Users\...)
 # os.chdir(path2)
-# to load latest csv file to a panda dataframe
+
+# to load from the internet (scraping)
 # input date in the ff. format MMDDYYYY
-prevdate = ('11282018')
-prevurl = '3783'
-end_date = ('11292018')
-endurl = '3784'
+# manually adjust url number (depends on forum thread activity)
+prevdate = ('01242019')
+prevurl = '3843'
+end_date = ('01252019')
+endurl = '3844'
 #i = f'{datetime.now():%m%d%Y}'
 #end_date = str(i[:10])
-
+pseurl = str('https://www.pse.com.ph/stockMarket/marketInfo-marketActivity.html?tab=4')
 url = str('http://www.stockmarketpilipinas.com/attachment.php?aid='+endurl)
 c = pd.read_csv(url)
+
 os.chdir(path1)
 c.to_csv('stockQuotes_' + end_date + '.csv')
 
