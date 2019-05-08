@@ -1,23 +1,20 @@
-# ScreenerSerctor file shows a selected stock to be featured and will be compared against PSEi and all other Index Sector
-
 import os
 import datetime as datetime
+from datetime import datetime
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# Edit these paths first
-# Where is your csv located?
-path2 = (r'C:\Users\...) 
-# Where you want to save the output file?
-path3 = (r'C:\Users\...) 
+path1 = (r'C:\Users\windows_10\PyProjects\Stocks\PSE screener\stockQuotes')
+path2 = (r'C:\Users\windows_10\PyProjects\Stocks\PSE screener')
+path3 = (r'C:\Users\windows_10\PyProjects\Stocks\PSE screener\stockCaps')
 
 # Choose the stock and last trading date
-What_Stock = 'ISM'
+What_Stock = 'BPI'
 Index = '^PSEi'
-end_date = ('01252019')  # i = f'{datetime.now():%m%d%Y}'end_date = str(i[:10])
+end_date = ('05082019')  # i = f'{datetime.now():%m%d%Y}'end_date = str(i[:10])
 os.chdir(path2)
 # load csv to a panda dataframe
-df = pd.read_csv('conso' + end_date + '.csv')
+df = pd.read_csv('ytd' + end_date + '.csv')
 df['DATE'] = pd.to_datetime(df.DATE)
 # make the dates column as index
 df.set_index('DATE', inplace=True)
@@ -53,12 +50,12 @@ stats = round(desc[desc.columns[3:]], 2)
 stats.index.name = 'Stats'
 print(stats)
 df2.index.name = 'DATE'
-
+#df2['DATE'] = pd.to_datetime(df2.index.name)
 
 plt.rc('axes',edgecolor='snow')
 plt.rc_context({'ytick.color':'gray'})
 plt.subplot2grid((6, 2), (0, 0), rowspan=2, colspan=1)
-plt.plot(df2.CLOSE, color='dodgerblue', linewidth=1.4)
+plt.plot(df2.CLOSE, color='dodgerblue', linewidth=2.4)
 plt.title('Investa Stock Trendings' +
           ' (wk' + str(end_date) + ')', color='blue')
 plt.xticks([])
@@ -102,6 +99,7 @@ plt.subplot2grid((6, 2), (5, 0), rowspan=1, colspan=1)
 plt.bar(df2.index, df2.NFB, color='purple', linewidth=1)
 plt.axis('on')
 plt.yticks([])
+plt.xticks([])
 plt.grid(False)
 plt.legend(['Net Foreign'], loc='upper center',prop={'size': 7})
 
@@ -117,7 +115,7 @@ FIN='^FINANCIAL'
 # end_date = ('12202018')
 os.chdir(path2)
 
-df=pd.read_csv('conso' + end_date + '.csv')
+df=pd.read_csv('ytd' + end_date + '.csv')
 df['DATE']=pd.to_datetime(df.DATE)
 df.set_index('DATE', inplace=True)
 df2=df[df['TICKER'] == IND]
@@ -133,7 +131,7 @@ LastPrice5=abs(df6.CLOSE[-1])
 df7=df[df['TICKER'] == FIN]
 LastPrice6=abs(df7.CLOSE[-1])
 
-LastPrice=abs(df2.CLOSE[-50])
+LastPrice=abs(df2.CLOSE[-1])
 LastDate=str(df2.index[-1])
 LastDateYTDs=str(df2.index[0])
 LastDateYTD=str(df2.index[12])
@@ -147,24 +145,24 @@ YTD=round((df2.CLOSE[(int(last)) - 1]
 plt.rc('axes',edgecolor='snow')
 # plt.figure(figsize=(20, 10))
 # plt.subplot(6, 2, 1) #rows,colums,position
-plt.subplot2grid((6, 2), (0, 1), rowspan=1, colspan=1)
+plt.subplot2grid((6, 2), (2, 1), rowspan=1, colspan=1)
 plt.plot(df2.CLOSE, color='fuchsia', linewidth=1)
 plt.title('SECTOR RANKINGS ' + str(end_date), color='gray')
 plt.xticks([])
 plt.axis('off')
 plt.annotate("         " + str(df2.CLOSE[-1]), xy=(LastDate, LastPrice),
              color='fuchsia', fontSize=8)
-plt.annotate('YTD   ', xy=(LastDateYTDs, LastPrice),
+plt.annotate('YTD  ', xy=(LastDateYTDs, LastPrice),
              color='fuchsia', fontSize=8)
-plt.annotate('   %', xy=(LastDateP, LastPrice),
+plt.annotate('    % ', xy=(LastDateP, LastPrice),
              color='fuchsia', fontSize=8)
-plt.annotate('    ' + str(YTD), xy=(LastDateYTD, LastPrice),
+plt.annotate('      ' + str(YTD), xy=(LastDateYTD, LastPrice),
              color='fuchsia', fontSize=8)
 plt.legend([IND], loc='upper center', prop={'size': 7})
 plt.axhline(round(df2.describe().loc['mean', 'CLOSE'], 2),
             color='gray', alpha=.4, linewidth=1.2, linestyle='--')
 
-LastPrice=abs(df3.CLOSE[-50])
+LastPrice=abs(df3.CLOSE[-1])
 LastDate=str(df3.index[-1])
 LastDateYTDs=str(df3.index[0])
 LastDateYTD=str(df3.index[12])
@@ -176,7 +174,7 @@ YTD=round((df3.CLOSE[(int(last)) - 1]
              - df3.CLOSE[0]) / df3.CLOSE[0] * 100, 2)
 
 # plt.subplot(6, 2, 2, facecolor='w')
-plt.subplot2grid((6, 2), (2, 1), rowspan=1, colspan=1)
+plt.subplot2grid((6, 2), (1, 1), rowspan=1, colspan=1)
 plt.plot(df3.CLOSE, color='olivedrab', linewidth=1)
 plt.xticks([])
 plt.axis('off')
@@ -184,9 +182,9 @@ plt.annotate("         " + str(df3.CLOSE[-1]), xy=(LastDate, LastPrice),
              color='olivedrab', fontSize=8)
 plt.annotate('YTD ', xy=(LastDateYTDs, LastPrice),
              color='olivedrab', fontSize=8)
-plt.annotate('    %', xy=(LastDateP, LastPrice),
+plt.annotate('    % ', xy=(LastDateP, LastPrice),
              color='olivedrab', fontSize=8)
-plt.annotate('    ' + str(YTD), xy=(LastDateYTD, LastPrice),
+plt.annotate('      ' + str(YTD), xy=(LastDateYTD, LastPrice),
              color='olivedrab', fontSize=8)
 plt.legend([SER], loc='upper center', prop={'size': 7})
 plt.axhline(round((df3.describe().loc['mean', 'CLOSE']), 2),
@@ -206,16 +204,16 @@ YTD=round((df4.CLOSE[(int(last)) - 1]
 # plt.subplot(6, 2, 3, facecolor='w')
 plt.subplot2grid((6, 2), (5, 1), rowspan=1, colspan=1)
 plt.plot(df4.CLOSE, color='coral', linewidth=1)
-# plt.xticks([])
+plt.xticks([])
 plt.yticks([])
 plt.axis('on')
 plt.annotate("         " + str(df4.CLOSE[-1]), xy=(LastDate, LastPrice),
              color='coral', fontSize=8)
 plt.annotate('YTD ', xy=(LastDateYTDs, LastPrice),
              color='coral', fontSize=8)
-plt.annotate('    %', xy=(LastDateP, LastPrice),
+plt.annotate('    % ', xy=(LastDateP, LastPrice),
              color='coral', fontSize=8)
-plt.annotate('    ' + str(YTD), xy=(LastDateYTD, LastPrice),
+plt.annotate('      ' + str(YTD), xy=(LastDateYTD, LastPrice),
              color='coral', fontSize=8)
 plt.legend([MIN], loc='upper center', prop={'size': 7})
 plt.axhline(round(df4.describe().loc['mean', 'CLOSE'], 2),
@@ -241,16 +239,16 @@ plt.annotate("         " + str(df5.CLOSE[-1]), xy=(LastDate, LastPrice),
              color='cornflowerblue', fontSize=8)
 plt.annotate('YTD ', xy=(LastDateYTDs, LastPrice),
              color='cornflowerblue', fontSize=8)
-plt.annotate('    %', xy=(LastDateP, LastPrice),
+plt.annotate('    % ', xy=(LastDateP, LastPrice),
              color='cornflowerblue', fontSize=8)
-plt.annotate('    ' + str(YTD), xy=(LastDateYTD, LastPrice),
+plt.annotate('      ' + str(YTD), xy=(LastDateYTD, LastPrice),
              color='cornflowerblue', fontSize=8)
 plt.legend([HOL], loc='upper center', prop={'size': 7})
 plt.grid(False)
 plt.axhline(round(df5.describe().loc['mean', 'CLOSE'], 2),
             color='gray', alpha=.4, linewidth=1.2, linestyle='--')
 
-LastPrice=abs(df6.CLOSE[-50])
+LastPrice=abs(df6.CLOSE[-1])
 LastDate=str(df6.index[-1])
 LastDateYTDs=str(df6.index[0])
 LastDateYTD=str(df6.index[12])
@@ -262,7 +260,7 @@ YTD=round((df6.CLOSE[(int(last)) - 1]
              - df6.CLOSE[0]) / df6.CLOSE[0] * 100, 2)
 
 # plt.subplot(6, 2, 5, facecolor='w')
-plt.subplot2grid((6, 2), (1, 1), rowspan=1, colspan=1)
+plt.subplot2grid((6, 2), (0, 1), rowspan=1, colspan=1)
 plt.plot(df6.CLOSE, color='darkgoldenrod', linewidth=1)
 plt.xticks([])
 plt.axis('off')
@@ -270,9 +268,9 @@ plt.annotate("         " + str(df6.CLOSE[-1]), xy=(LastDate, LastPrice),
              color='darkgoldenrod', fontSize=8)
 plt.annotate('YTD ', xy=(LastDateYTDs, LastPrice),
              color='darkgoldenrod', fontSize=8)
-plt.annotate('    %', xy=(LastDateP, LastPrice),
+plt.annotate('    % ', xy=(LastDateP, LastPrice),
              color='darkgoldenrod', fontSize=8)
-plt.annotate('    ' + str(YTD), xy=(LastDateYTD, LastPrice),
+plt.annotate('      ' + str(YTD), xy=(LastDateYTD, LastPrice),
              color='darkgoldenrod', fontSize=8)
 plt.legend([PRO], loc='upper center', prop={'size': 7})
 plt.axhline(round(df6.describe().loc['mean', 'CLOSE'], 2),
@@ -298,9 +296,9 @@ plt.annotate("         " + str(df7.CLOSE[-1]), xy=(LastDate, LastPrice),
              color='deepskyblue', fontSize=8)
 plt.annotate('YTD ', xy=(LastDateYTDs, LastPrice),
              color='deepskyblue', fontSize=8)
-plt.annotate('    %', xy=(LastDateP, LastPrice),
+plt.annotate('    % ', xy=(LastDateP, LastPrice),
              color='deepskyblue', fontSize=8)
-plt.annotate('    ' + str(YTD), xy=(LastDateYTD, LastPrice),
+plt.annotate('      ' + str(YTD), xy=(LastDateYTD, LastPrice),
              color='deepskyblue', fontSize=8)
 plt.legend([FIN], loc='upper center', prop={'size': 7})
 plt.axhline(round(df7.describe().loc['mean', 'CLOSE'], 2),
