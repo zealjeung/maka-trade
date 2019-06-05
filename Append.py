@@ -7,10 +7,10 @@ path2 = (r'C:\Users\windows_10\PyProjects\Stocks\PSE screener')
 # os.chdir(path2)
 # to load latest csv file to a panda dataframe
 # input date in the ff. format MMDDYYYY
-prevdate = ('05072019')
-prevurl = '3967'
-end_date = ('05082019')
-endurl = '3968'
+prevdate = ('06032019')
+prevurl = '3985'
+end_date = ('06042019')
+endurl = '3986'
 #i = f'{datetime.now():%m%d%Y}'
 #end_date = str(i[:10])
 pseurl = str('https://www.pse.com.ph/stockMarket/marketInfo-marketActivity.html?tab=4')
