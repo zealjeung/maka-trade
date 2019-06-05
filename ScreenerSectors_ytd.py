@@ -9,9 +9,9 @@ path2 = (r'C:\Users\windows_10\PyProjects\Stocks\PSE screener')
 path3 = (r'C:\Users\windows_10\PyProjects\Stocks\PSE screener\stockCaps')
 
 # Choose the stock and last trading date
-What_Stock = 'BPI'
+What_Stock = 'NOW'
 Index = '^PSEi'
-end_date = ('05082019')  # i = f'{datetime.now():%m%d%Y}'end_date = str(i[:10])
+end_date = ('06042019')  # i = f'{datetime.now():%m%d%Y}'end_date = str(i[:10])
 os.chdir(path2)
 # load csv to a panda dataframe
 df = pd.read_csv('ytd' + end_date + '.csv')
@@ -131,7 +131,7 @@ LastPrice5=abs(df6.CLOSE[-1])
 df7=df[df['TICKER'] == FIN]
 LastPrice6=abs(df7.CLOSE[-1])
 
-LastPrice=abs(df2.CLOSE[-1])
+LastPrice=abs(df2.CLOSE[-100])
 LastDate=str(df2.index[-1])
 LastDateYTDs=str(df2.index[0])
 LastDateYTD=str(df2.index[12])
