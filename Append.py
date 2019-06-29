@@ -2,27 +2,32 @@
 import pandas as pd
 from datetime import datetime
 import os
-path1 = (r'C:\Users\windows_10\PyProjects\Stocks\PSE screener\stockQuotes')
-path2 = (r'C:\Users\windows_10\PyProjects\Stocks\PSE screener')
+path1 = (r'C:\...')
+path2 = (r'C:\...')
 # os.chdir(path2)
 # to load latest csv file to a panda dataframe
 # input date in the ff. format MMDDYYYY
-prevdate = ('06032019')
-prevurl = '3985'
-end_date = ('06042019')
-endurl = '3986'
+prevdate = ('06272019')
+prevurl = '3998'
+end_date = ('06282019')
+endurl = '4004'
 #i = f'{datetime.now():%m%d%Y}'
 #end_date = str(i[:10])
-pseurl = str('https://www.pse.com.ph/stockMarket/marketInfo-marketActivity.html?tab=4')
-url = str('http://www.stockmarketpilipinas.com/attachment.php?aid='+endurl)
-c = pd.read_csv(url)
+#pseurl = str('https://www.pse.com.ph/stockMarket/marketInfo-marketActivity.html?tab=4')
+#url = str('http://www.stockmarketpilipinas.com/attachment.php?aid='+endurl)
+#c = pd.read_csv(url)
 
 os.chdir(path1)
-c.to_csv('stockQuotes_' + end_date + '.csv')
+#c.to_csv('stockQuotes_' + end_date + '.csv')
 
-os.chdir(path1)
+#os.chdir(path1)
+#latestcsv = 'stockQuotes_' + end_date + '.csv'
+#dfnew = pd.read_csv(url, names=['TICKER', 'DATE', 'OPEN',
+#                    'HIGH', 'LOW', 'CLOSE', 'VOLUME', 'NFB'], index_col='DATE')
+
+os.chdir(path2)
 latestcsv = 'stockQuotes_' + end_date + '.csv'
-dfnew = pd.read_csv(url, names=['TICKER', 'DATE', 'OPEN',
+dfnew = pd.read_csv(latestcsv, names=['TICKER', 'DATE', 'OPEN',
                     'HIGH', 'LOW', 'CLOSE', 'VOLUME', 'NFB'], index_col='DATE')
 
 os.chdir(path2)
