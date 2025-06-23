@@ -1,42 +1,49 @@
 import os
-path2 = (r'D:\Users\jong\PyProjects\Stocks\PSE screener')
-path3 = (r'D:\Users\jong\PyProjects\Stocks\PSE screener\stockCaps')
 import pandas as pd
 import matplotlib.pyplot as plt
-from mpl_finance import candlestick_ohlc
-import matplotlib.dates as mdates
-from matplotlib.dates import DateFormatter, date2num, WeekdayLocator, DayLocator, MONDAY, SATURDAY, SUNDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY
+import mplfinance as mpf
+from datetime import datetime
 
-date1 = "2018-1-1"
-date2 = "2018-11-08"
-end_date = '11292018'
-What_Stock1 = 'NOW'
+# --- CONFIGURATION ---
+# You can set these via environment variables or edit directly
+DATA_DIR = os.environ.get("MAKA_TRADE_DATA_PATH", os.path.abspath(os.path.dirname(__file__)))
+CSV_FILENAME = 'conso11292018.csv'  # Update as needed
+WHAT_STOCK = 'NOW'
+START_DATE = "2018-01-01"
+END_DATE = "2018-11-08"
+OUTPUT_FILENAME = f'OHLC_{WHAT_STOCK}_{END_DATE}.svg'
 
-os.chdir(path2)
-df = pd.read_csv('conso' + end_date + '.csv', index_col=0,
-                 parse_dates=True, infer_datetime_format=True)
-df = df[(df.index >= date1) & (df.index <= date2)]
-df2 = df[df['TICKER'] == What_Stock1]
+# --- FILE LOADING ---
+csv_path = os.path.join(DATA_DIR, CSV_FILENAME)
+if not os.path.isfile(csv_path):
+    raise FileNotFoundError(f"Data file not found: {csv_path}")
 
-mondays = WeekdayLocator(MONDAY)        # major ticks on the mondays
-dayFormatter = DateFormatter('%Y-%m-%d')
+df = pd.read_csv(csv_path, index_col=0, parse_dates=True, infer_datetime_format=True)
 
-fig, ax = plt.subplots()  # figsize=(21, 10.8)
-fig.subplots_adjust(bottom=0.5)
-ax.xaxis.set_major_locator(mondays)
-ax.xaxis.set_major_formatter(dayFormatter)
-# ax.xaxis.set_major_locator(mdates.AutoDateLocator())
+# --- FILTER DATA ---
+df = df[(df.index >= START_DATE) & (df.index <= END_DATE)]
+df_stock = df[df['TICKER'] == WHAT_STOCK].copy()
 
+if df_stock.empty:
+    raise ValueError(f"No data found for stock {WHAT_STOCK} between {START_DATE} and {END_DATE}")
 
-candlestick_ohlc(ax, zip(mdates.date2num(df2.index.to_pydatetime()),
-                         df2['OPEN'], df2['HIGH'],
-                         df2['LOW'], df2['CLOSE']),
-                 width=.7, colorup='g', alpha=.9)
+# --- PREPARE DATA FOR MPLFINANCE ---
+df_stock.index.name = 'Date'
+ohlc = df_stock[['OPEN', 'HIGH', 'LOW', 'CLOSE']].copy()
+ohlc.index = pd.to_datetime(ohlc.index)
 
-ax.xaxis_date()
-ax.autoscale_view()
-plt.title([What_Stock1], color='k')
-plt.setp(plt.gca().get_xticklabels(), rotation=45, horizontalalignment='right')
-os.chdir(path3)
-plt.savefig(end_date + What_Stock1 + '.svg', dpi=1200)
+# --- PLOT CANDLESTICK CHART ---
+mpf_style = mpf.make_mpf_style(base_mpf_style='yahoo', rc={'font.size': 10})
+fig, axlist = mpf.plot(
+    ohlc,
+    type='candle',
+    style=mpf_style,
+    title=f"{WHAT_STOCK} OHLC ({START_DATE} to {END_DATE})",
+    ylabel='Price',
+    returnfig=True,
+    volume=False,
+    figratio=(16, 9),
+    figscale=1.2,
+    savefig=dict(fname=os.path.join(DATA_DIR, OUTPUT_FILENAME), dpi=120)
+)
 plt.show()
